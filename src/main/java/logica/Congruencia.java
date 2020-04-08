@@ -72,11 +72,11 @@ public class Congruencia {
                         + "x=" + c);
                 congruencia.mcdP(ecuacion1.getModulo(), ecuacion2.getModulo());
                 String cadena = congruencia.getCache();
-                println("Por algoritmo de euclides: \n" + cadena.substring(0, cadena.length()-2));
+                println("Por algoritmo de euclides: \n" + cadena.substring(0, cadena.length()-1));
                 println("(" + ecuacion1.getModulo() + "," + ecuacion2.getModulo() + ")=" + mcd);
                 int[] combinacion = congruencia.combinacionLinealP();
                 cadena = congruencia.getCache();
-                println("Expresandolo como una combinacion lineal: \n" + cadena.substring(0, cadena.length()-2));
+                println("Expresandolo como una combinacion lineal: \n" + cadena.substring(0, cadena.length()-1));
                 println("(y0', z0')=(" + combinacion[1] + "," + combinacion[3] + ")");
                 y0 = combinacion[1] * (c / mcd);
                 println("Y asi la solucion del sistema es (y0, z0)=(" + combinacion[1] * (c / mcd) + ","
@@ -88,7 +88,7 @@ public class Congruencia {
             println("Entonces x =" + ecuacion1.getValor() + "+" + ecuacion1.getModulo() + "(" + y0 + "+"
                     + Math.abs(ecuacion2.getModulo() / mcd) + "z" + ")");
             println("Pasandolo a congruencias: x=" + (ecuacion1.getValor() + ecuacion1.getModulo() * y0) + "(mod"
-                    + (Math.abs(ecuacion2.getModulo() / mcd)) + ")");
+                    + (Math.abs((ecuacion1.getModulo() * ecuacion2.getModulo()) / mcd)) + ")");
             println("Finalmente nuestro sistema de ecuaciones es:");
             sistemaC.add(new Ecuacion((ecuacion1.getValor() + ecuacion1.getModulo() * y0),
                     Math.abs((ecuacion1.getModulo() * ecuacion2.getModulo()) / mcd)));
@@ -161,7 +161,7 @@ public class Congruencia {
         println(b + "=" + a + "(" + q + ")  +" + r);
         pila.add(new int[] { b, a, q, r });
         if (r == 0) {
-            return a;
+            return Math.abs(a);
         } else {
             return mcdPAux(r, a);
         }
@@ -172,7 +172,7 @@ public class Congruencia {
         int q = b / a;
         pila.add(new int[] { b, a, q, r });
         if (r == 0) {
-            return a;
+            return Math.abs(a);
         } else {
             return mcdAux(r, a);
         }

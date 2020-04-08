@@ -76,7 +76,7 @@ public class CongruenciasControlador implements Controlador {
         }));
         txtfb.setTextFormatter(new TextFormatter<>(change -> {
             String text = change.getText();
-            if (text.matches("[0-9]*")) {
+            if (text.matches("[0-9]*") ) {
                 return change;
             }
             return null;
